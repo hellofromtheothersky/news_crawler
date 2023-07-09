@@ -11,7 +11,6 @@ if __name__ == "__main__":
         pages_info=json.load(rf)
 
     crawler=VtvCrawler(pages_info['vtv']['page_link'], pages_info['vtv']['selector'])
-    crawler.process(num_of_cate=1, num_of_new_per_cate=0)
-    news=crawler.get()
-    for new in news:
+    crawler.process(num_of_cate=-1, num_of_new_per_cate=3)
+    for new in crawler.news_data:
         print(new['cate'], new['title'])

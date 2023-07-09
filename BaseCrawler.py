@@ -42,11 +42,10 @@ class BaseCrawler(ABC):
     def get_new(self, link):
         news = []
         cate_page_soup = BeautifulSoup(get_content(link), features="lxml")
-        cate_page_soup = cate_page_soup.select_one(self.selector["listnew"])
 
         for new_link_soup in cate_page_soup.find_all("a"):
             link = new_link_soup.get("href")
-            if link.startswith("/"):
+            if link and link.startswith("/"):
                 news.append(self.page_link + link)
 
         return list(set(news))
@@ -65,30 +64,33 @@ class BaseCrawler(ABC):
         )
         return {"title": title, "time": time, "content": content}
 
+
     def process(self, num_of_cate=-1, num_of_new_per_cate=-1):
         count_cate=0
         cates = self.get_category()
+
         for cate in cates:
-            # continue of end
-            if count_cate == num_of_cate: break
-            else: count_cate+=1
-            logger.info("----------> Parsing cate: " + cate[1])
-
             count_new=0
-            news_link = self.get_new(cate[1])
-            for new_link in news_link:
-                # continue of end
-                if count_new == num_of_new_per_cate: break
-                else: count_new+=1
-                logger.info("----> Parsing new: " + new_link)
-
-                try:
-                    new_data = self.get_new_detail(new_link)
-                except AttributeError:
-                    logger.info("--> Skip: " + new_link)
-                else:
-                    new_data["cate"] = cate[0]
-                    self.news_data.append(new_data)
+            if count_cate == num_of_cate: 
+                break
+            try:
+                news_link = self.get_new(cate[1])
+            except AttributeError:
+                logger.info("Skip cate: " + cate[1])
+            else:
+                count_cate+=1
+                for new_link in news_link:
+                    # continue of end
+                    if count_new == num_of_new_per_cate: 
+                        break
+                    try:
+                        new_data = self.get_new_detail(new_link)
+                    except AttributeError:
+                        logger.info("Skip news: " + new_link)
+                    else:
+                        count_new+=1
+                        new_data["cate"] = cate[0]
+                        self.news_data.append(new_data)
 
 
     def get(self):

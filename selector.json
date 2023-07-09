@@ -1,11 +1,10 @@
 {
     "thanhnien":
     {
-        "page_link": "https://thanhnien.vn/",
+        "page_link": "https://thanhnien.vn",
         "selector":
         {
             "cate": "body > div:nth-child(1) > div.header.od__header > div > div.header__sticky > div.header__middle > div > div.header__nav > div > ul",
-            "listnew": "#content",
             "newtitle": "#content > div.detail__section.d_detail__infographic > div > div > div.detail__main.detail-container-full > div > div > h1",
             "newcontent": "#content > div.detail__section.d_detail__infographic > div > div > div.detail__main.detail-container-full > div > div > div.detail-cmain",
             "newtime": "#content > div.detail__section.d_detail__infographic > div > div > div.detail__main.detail-container-full > div > div > div.detail-info.rate-form > div.detail-time > div"
@@ -13,7 +12,7 @@
     },
     "vtv":
     {
-        "page_link": "https://vtv.vn/",
+        "page_link": "https://vtv.vn",
         "selector":
         {
             "cate": "#admWrapsite > div.header > div > div.menu_chinh > ul",
@@ -29,7 +28,6 @@
         "selector":
         {
             "cate": "",
-            "listnew": "",
             "newtitle": "",
             "newcontent": "",
             "newtime": ""
