@@ -5,9 +5,10 @@
         "selector":
         {
             "cate": "body > div:nth-child(1) > div.header.od__header > div > div.header__sticky > div.header__middle > div > div.header__nav > div > ul",
-            "newtitle": "#content > div.detail__section.d_detail__infographic > div > div > div.detail__main.detail-container-full > div > div > h1",
-            "newcontent": "#content > div.detail__section.d_detail__infographic > div > div > div.detail__main.detail-container-full > div > div > div.detail-cmain",
-            "newtime": "#content > div.detail__section.d_detail__infographic > div > div > div.detail__main.detail-container-full > div > div > div.detail-info.rate-form > div.detail-time > div"
+            "listnew": "#content > div.list__focus",
+            "newtitle": "div.detail__main.detail-container-full",
+            "newcontent": "div.detail__main.detail-container-full",
+            "newtime": "div.detail__main.detail-container-full"
         }
     },
     "vtv":
@@ -19,7 +20,8 @@
             "listnew": "#admWrapsite > div.adm-mainsection > div.category-gradient-top.clearfix",
             "newtitle": "#admWrapsite > div.adm-mainsection > div.wp1160 > div.w1156.detailpage > div.detail_left.border_right.adm-leftsection > div.w638.mgl96 > div.noidung > h1",
             "newcontent": "#admWrapsite > div.adm-mainsection > div.wp1160 > div.w1156.detailpage > div.detail_left.border_right.adm-leftsection",
-            "newtime": "#admWrapsite > div.adm-mainsection > div.wp1160 > div.w1156.detailpage > div.detail_left.border_right.adm-leftsection > div.w638.mgl96 > div.noidung > p > span"
+            "newtime": "#admWrapsite > div.adm-mainsection > div.wp1160 > div.w1156.detailpage > div.detail_left.border_right.adm-leftsection > div.w638.mgl96 > div.noidung > p > span",
+            "listnew@https://vtv.vn/the-thao.htm": "#admWrapsite > div.adm-mainsection > div.content.widthcontent.pt27 > div"
         }
     },
     "":
