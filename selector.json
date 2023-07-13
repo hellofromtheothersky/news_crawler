@@ -24,12 +24,25 @@
             "listnew@https://vtv.vn/the-thao.htm": "#admWrapsite > div.adm-mainsection > div.content.widthcontent.pt27 > div"
         }
     },
+    "kenh14":
+    {
+        "page_link": "https://kenh14.vn",
+        "selector":
+        {
+            "cate": "#k14-main-menu-wrapper > div > div > ul",
+            "listnew": "#admWrapsite > div.kenh14-wrapper.category.k14-category > div.kenh14-body-wrapper > div > div.kbw-content > div > div > div.w720.kbwcb-left.fl",
+            "newtitle": "#k14-detail-content > div.w700.kbwcb-left.kbwcb-top.fl.adm-leftsection > div > div > div.klw-body-top > div.kbwc-header.mb-20 > h1",
+            "newcontent": "#k14-detail-content > div.w700.kbwcb-left.kbwcb-top.fl.adm-leftsection > div > div > div.klw-body-top > div.klw-new-content",
+            "newtime": "#k14-detail-content > div.w700.kbwcb-left.kbwcb-top.fl.adm-leftsection > div > div > div.klw-body-top > div.kbwc-header.mb-20 > div.kbwc-meta > span.kbwcm-time"
+        }
+    },
     "":
     {
         "page_link": "",
         "selector":
         {
             "cate": "",
+            "listnew": "",
             "newtitle": "",
             "newcontent": "",
             "newtime": ""
