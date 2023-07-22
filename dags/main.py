@@ -17,7 +17,7 @@ default_args = {
 
 with DAG( 
     default_args=default_args,
-    dag_id='news_crawler',
+    dag_id='news_crawlerr',
     description='crawl data from various newspaper sources, and then run kakka, spark',
     start_date = datetime.now()- timedelta(days=2),
     schedule_interval='* * * * *',
@@ -27,17 +27,30 @@ with DAG(
         task_id='start',
         bash_command="echo START",
     )
+
     crawl_kenh14 = BashOperator(
         task_id='crawl_kenh14',
         bash_command="cd /opt/airflow/news_crawler/ ; python3 crawl_me.py --s kenh14 --nc 1 --nn 1 --u 1 ; cd -" ,
     )
+    produce_kenh14 = BashOperator(
+        task_id='produce_kenh14',
+        bash_command="cd /opt/airflow/news_crawler/ ; python3 producer.py --s kenh14 ; cd -" ,
+    )
+
     crawl_vtv = BashOperator(
         task_id='crawl_vtv',
         bash_command="cd /opt/airflow/news_crawler/ ; python3 crawl_me.py --s vtv --nc 1 --nn 1 --u 1 ; cd -" ,
     )
+    produce_vtv = BashOperator(
+        task_id='produce_vtv',
+        bash_command="cd /opt/airflow/news_crawler/ ; python3 producer.py --s vtv ; cd -" ,
+    )
+
     end = BashOperator(
         task_id='end',
         bash_command="echo END",
     )
 
-    start>>[crawl_kenh14, crawl_vtv]>>end
+    # start>>[crawl_kenh14>>produce_kenh14, crawl_vtv>>produce_vtv]>>end
+    start>>crawl_kenh14>>produce_kenh14>>end
+    start>>crawl_vtv>>produce_vtv>>end

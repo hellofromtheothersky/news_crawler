@@ -27,7 +27,7 @@ class BaseCrawler(ABC):
     page_soup = ""
     selector = {}
     news_data = []
-    old_data=pd.DataFrame()
+    store_link=pd.DataFrame()
 
 
     def __init__(self, link, selector):
@@ -105,12 +105,10 @@ class BaseCrawler(ABC):
     def process(self, num_of_cate=-1, num_of_new_per_cate=-1, incremental=True):
         if incremental==True:
             try:
-                self.old_data=pd.read_csv('data.csv')
+                with open('store_link.json', 'r') as rf:
+                    self.store_link=json.load(rf)
             except FileNotFoundError:
-                self.old_data = pd.DataFrame(columns=['title', 'time', 'content', 'cate', 'name', 'link'])
-
-            old_data_link=list(self.old_data.where(self.old_data['name']==self.page_name)['link'])
-
+                self.store_link = []
 
         auto_parse=0
         cate_skip=0
@@ -136,7 +134,7 @@ class BaseCrawler(ABC):
                         break
                     count_new+=1
 
-                    if incremental==True and new_link in old_data_link:
+                    if incremental==True and new_link in self.store_link:
                         break
                             
                     try:
@@ -153,16 +151,19 @@ class BaseCrawler(ABC):
                     total_news+=1
                     if total_news==100:
                         logger.info("Progress: "+str(total_news))
+
         logger.info("num of skip cate: "+ str(cate_skip))
         logger.info("num of auto-parse new: "+ str(auto_parse))
 
-        pd.concat([self.old_data, pd.DataFrame(self.news_data)], axis=0).to_csv('data.csv', index=False)
+        self.store_link.extend([x['link'] for x in self.news_data])
+        with open('store_link.json', 'w') as wf:
+            json.dump(self.store_link, wf)
 
 
     def get(self):
         return self.news_data
     
     def save(self):
-        with open ('newest_data.json', 'w', encoding='utf-8') as rf:
+        with open ('newest_data_'+self.page_name+'.json', 'w', encoding='utf-8') as rf:
             json.dump(self.news_data, rf)
     
